@@ -65,6 +65,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
     private void initView(Context context) {
         mLeftText = new TextView(context);
+        mCenterLayout = new LinearLayout(context);
         mRightLayout = new LinearLayout(context);
         mDividerView = new View(context);
 
@@ -75,13 +76,14 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mLeftText.setGravity(Gravity.CENTER_VERTICAL);
         mLeftText.setPadding(mOutPadding, 0, mOutPadding, 0);
 
-        mCenterLayout = new LinearLayout(context);
         mCenterText = new TextView(context);
         mCenterLayout.addView(mCenterText);
 
         mCenterLayout.setGravity(Gravity.CENTER);
         mCenterText.setTextSize(DEFAULT_MAIN_TEXT_SIZE);
         mCenterText.setSingleLine();
+        mCenterText.setGravity(Gravity.CENTER);
+        mCenterText.setEllipsize(TextUtils.TruncateAt.END);
 
         mRightLayout.setPadding(mOutPadding, 0, mOutPadding, 0);
 
