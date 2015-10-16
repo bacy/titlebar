@@ -1,0 +1,34 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+*.dex
+*.log
+# build.gradle
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse stuff
+.classpath
+.project
+.settings
+
+# Gradle stuff
+.gradle/
+build/
+.idea/
+out/
+*.iml
+.apk
