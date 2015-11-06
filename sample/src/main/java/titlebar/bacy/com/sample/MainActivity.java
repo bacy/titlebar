@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         titleBar.setTitle("文章详情");
         titleBar.setTitleColor(Color.WHITE);
+        titleBar.setSubTitleColor(Color.WHITE);
         titleBar.setDividerColor(Color.GRAY);
 
         titleBar.setActionTextColor(Color.WHITE);
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void performAction(View view) {
                 Toast.makeText(MainActivity.this, "点击了收藏", Toast.LENGTH_SHORT).show();
                 mCollectView.setImageResource(R.mipmap.fabu);
+                titleBar.setTitle("文章详情\n朋友圈");
             }
         });
 

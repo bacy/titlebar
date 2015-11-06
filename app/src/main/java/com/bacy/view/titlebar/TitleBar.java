@@ -21,13 +21,15 @@ import java.util.LinkedList;
  */
 public class TitleBar extends ViewGroup implements View.OnClickListener {
     private static final int DEFAULT_MAIN_TEXT_SIZE = 20;
-    private static final int DEFAULT_SUB_TEXT_SIZE = 16;
+    private static final int DEFAULT_SUB_TEXT_SIZE = 14;
+    private static final int DEFAULT_ACTION_TEXT_SIZE = 16;
     private static final String STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height";
 
     private TextView mLeftText;
     private LinearLayout mRightLayout;
     private LinearLayout mCenterLayout;
     private TextView mCenterText;
+    private TextView mSubTitleText;
     private View mDividerView;
 
     private boolean mImmersive;
@@ -71,19 +73,26 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 
-        mLeftText.setTextSize(DEFAULT_SUB_TEXT_SIZE);
+        mLeftText.setTextSize(DEFAULT_ACTION_TEXT_SIZE);
         mLeftText.setSingleLine();
         mLeftText.setGravity(Gravity.CENTER_VERTICAL);
         mLeftText.setPadding(mOutPadding, 0, mOutPadding, 0);
 
         mCenterText = new TextView(context);
+        mSubTitleText = new TextView(context);
         mCenterLayout.addView(mCenterText);
+        mCenterLayout.addView(mSubTitleText);
 
         mCenterLayout.setGravity(Gravity.CENTER);
         mCenterText.setTextSize(DEFAULT_MAIN_TEXT_SIZE);
         mCenterText.setSingleLine();
         mCenterText.setGravity(Gravity.CENTER);
         mCenterText.setEllipsize(TextUtils.TruncateAt.END);
+
+        mSubTitleText.setTextSize(DEFAULT_SUB_TEXT_SIZE);
+        mSubTitleText.setSingleLine();
+        mSubTitleText.setGravity(Gravity.CENTER);
+        mSubTitleText.setEllipsize(TextUtils.TruncateAt.END);
 
         mRightLayout.setPadding(mOutPadding, 0, mOutPadding, 0);
 
@@ -131,16 +140,24 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     public void setTitle(CharSequence title) {
         int index = title.toString().indexOf("\n");
         if (index > 0) {
-            setTitle(title.subSequence(0, index), title.subSequence(index + 2, title.length()));
+            setTitle(title.subSequence(0, index), title.subSequence(index + 1, title.length()), LinearLayout.VERTICAL);
         } else {
-            mCenterText.setText(title);
+            index = title.toString().indexOf("\t");
+            if (index > 0) {
+                setTitle(title.subSequence(0, index), " " + title.subSequence(index + 1, title.length()), LinearLayout.HORIZONTAL);
+            } else {
+                mCenterText.setText(title);
+                mSubTitleText.setVisibility(View.GONE);
+            }
         }
     }
 
-    public void setTitle(CharSequence title, CharSequence subTitle) {
+    private void setTitle(CharSequence title, CharSequence subTitle, int orientation) {
+        mCenterLayout.setOrientation(orientation);
         mCenterText.setText(title);
-//        mSubTitleText.setText(subTitle);
-//        mSubTitleText.setVisibility(View.VISIBLE);
+
+        mSubTitleText.setText(subTitle);
+        mSubTitleText.setVisibility(View.VISIBLE);
     }
 
     public void setCenterClickListener(OnClickListener l) {
@@ -160,7 +177,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     }
 
     public void setSubTitleColor(int resid) {
-//        mSubTitleText.setTextColor(resid);
+        mSubTitleText.setTextColor(resid);
     }
 
     public void setCustomTitle(View titleView) {
@@ -290,7 +307,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
             TextView text = new TextView(getContext());
             text.setGravity(Gravity.CENTER);
             text.setText(action.getText());
-            text.setTextSize(DEFAULT_SUB_TEXT_SIZE);
+            text.setTextSize(DEFAULT_ACTION_TEXT_SIZE);
             if (mActionTextColor != 0) {
                 text.setTextColor(mActionTextColor);
             }
