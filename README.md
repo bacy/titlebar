@@ -39,3 +39,6 @@
 ####5. 一行代码适配沉浸式
 ######如果你的项目使用了沉浸式，布局时候加上这行代码，TitleBar会自动填充状态栏
     titleBar.setImmersive(true);
+####6. 一行代码设置TitleBar高度
+######如果你的TitleBar没有固定高度，会默认设置48dip作为高度，你也可以自定义高度
+    titleBar.setHeight(48 * 2);
