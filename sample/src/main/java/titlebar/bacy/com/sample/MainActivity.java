@@ -17,6 +17,7 @@ import com.bacy.view.titlebar.TitleBar;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView mCollectView;
+    private boolean mIsSelected;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
             public void performAction(View view) {
                 Toast.makeText(MainActivity.this, "点击了收藏", Toast.LENGTH_SHORT).show();
                 mCollectView.setImageResource(R.mipmap.fabu);
-                titleBar.setTitle("文章详情\n朋友圈");
+                titleBar.setTitle(mIsSelected ? "文章详情\n朋友圈" : "帖子详情");
+                mIsSelected = !mIsSelected;
             }
         });
 

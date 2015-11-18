@@ -21,8 +21,10 @@ import java.util.LinkedList;
  */
 public class TitleBar extends ViewGroup implements View.OnClickListener {
     private static final int DEFAULT_MAIN_TEXT_SIZE = 20;
-    private static final int DEFAULT_SUB_TEXT_SIZE = 14;
+    private static final int DEFAULT_SUB_TEXT_SIZE = 12;
     private static final int DEFAULT_ACTION_TEXT_SIZE = 16;
+    private static final int DEFAULT_TITLE_BAR_HEIGHT = 48;
+
     private static final String STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height";
 
     private TextView mLeftText;
@@ -39,6 +41,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private int mActionPadding;
     private int mOutPadding;
     private int mActionTextColor;
+    private int mHeight;
 
     public TitleBar(Context context) {
         super(context);
@@ -62,6 +65,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         }
         mActionPadding = dip2px(5);
         mOutPadding = dip2px(8);
+        mHeight = dip2px(DEFAULT_TITLE_BAR_HEIGHT);
         initView(context);
     }
 
@@ -107,6 +111,11 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         if (mImmersive) {
             mStatusBarHeight = getStatusBarHeight();
         }
+    }
+
+    public void setHeight(int height) {
+        mHeight = height;
+        setMeasuredDimension(getMeasuredWidth(), mHeight);
     }
 
     public void setLeftImageResource(int resId) {
@@ -327,6 +336,15 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height;
+        if (heightMode != MeasureSpec.EXACTLY) {
+            height = mHeight + mStatusBarHeight;
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(mHeight, MeasureSpec.EXACTLY);
+        } else {
+            height = MeasureSpec.getSize(heightMeasureSpec) + mStatusBarHeight;
+        }
+
         measureChild(mLeftText, widthMeasureSpec, heightMeasureSpec);
         measureChild(mRightLayout, widthMeasureSpec, heightMeasureSpec);
         if (mLeftText.getMeasuredWidth() > mRightLayout.getMeasuredWidth()) {
@@ -339,9 +357,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
                     , heightMeasureSpec);
         }
         measureChild(mDividerView, widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec) + mStatusBarHeight);
-//        Log.d("bacy", mLeftText.getMeasuredWidth() + "," + mLeftText.getMeasuredHeight());
-//        Log.d("bacy1", mCenterLayout.getMeasuredWidth() + "," + mCenterLayout.getMeasuredHeight());
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
     }
 
     @Override
