@@ -110,6 +110,8 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mImmersive = immersive;
         if (mImmersive) {
             mStatusBarHeight = getStatusBarHeight();
+        } else {
+            mStatusBarHeight = 0;
         }
     }
 
