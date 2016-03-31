@@ -193,7 +193,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
 
     public void setCustomTitle(View titleView) {
         mCenterText.setVisibility(View.GONE);
-        addView(titleView);
+        mCenterLayout.addView(titleView);
     }
 
     public void setDivider(Drawable drawable) {
