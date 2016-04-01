@@ -42,3 +42,7 @@
 ####6. 一行代码设置TitleBar高度
 ######如果你的TitleBar没有固定高度，会默认设置48dip作为高度，你也可以自定义高度
     titleBar.setHeight(48 * 2);
+####7. 设置简单的副标题
+######如果TitleBar分主副标题，用\n和\t区分，如果\n,主副标题上下排列，如果\t，主副标题左右排列
+    titleBar.setTitle("文章详情\n副标题");
+    titleBar.setTitle("文章详情\t副标题");
