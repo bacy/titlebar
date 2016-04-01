@@ -32,6 +32,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private LinearLayout mCenterLayout;
     private TextView mCenterText;
     private TextView mSubTitleText;
+    private View mCustomCenterView;
     private View mDividerView;
 
     private boolean mImmersive;
@@ -192,8 +193,21 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     }
 
     public void setCustomTitle(View titleView) {
-        mCenterText.setVisibility(View.GONE);
-        addView(titleView);
+        if (titleView == null) {
+            mCenterText.setVisibility(View.VISIBLE);
+            if (mCustomCenterView != null) {
+                mCenterLayout.removeView(mCustomCenterView);
+            }
+
+        } else {
+            if (mCustomCenterView != null) {
+                mCenterLayout.removeView(mCustomCenterView);
+            }
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            mCustomCenterView = titleView;
+            mCenterLayout.addView(titleView, layoutParams);
+            mCenterText.setVisibility(View.GONE);
+        }
     }
 
     public void setDivider(Drawable drawable) {
