@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        titleBar.setTitle("文章详情");
+        titleBar.setTitle("文章详情\n副标题");
         titleBar.setTitleColor(Color.WHITE);
         titleBar.setSubTitleColor(Color.WHITE);
         titleBar.setDividerColor(Color.GRAY);

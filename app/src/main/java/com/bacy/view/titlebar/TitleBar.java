@@ -156,7 +156,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         } else {
             index = title.toString().indexOf("\t");
             if (index > 0) {
-                setTitle(title.subSequence(0, index), " " + title.subSequence(index + 1, title.length()), LinearLayout.HORIZONTAL);
+                setTitle(title.subSequence(0, index), "  " + title.subSequence(index + 1, title.length()), LinearLayout.HORIZONTAL);
             } else {
                 mCenterText.setText(title);
                 mSubTitleText.setVisibility(View.GONE);
@@ -184,12 +184,20 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mCenterText.setTextColor(resid);
     }
 
+    public void setTitleSize(float size) {
+        mCenterText.setTextSize(size);
+    }
+
     public void setTitleBackground(int resid) {
         mCenterText.setBackgroundResource(resid);
     }
 
     public void setSubTitleColor(int resid) {
         mSubTitleText.setTextColor(resid);
+    }
+
+    public void setSubTitleSize(float size) {
+        mSubTitleText.setTextSize(size);
     }
 
     public void setCustomTitle(View titleView) {
