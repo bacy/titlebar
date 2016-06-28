@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        boolean isImmersive = false;
         if (hasKitKat() && !hasLollipop()) {
+            isImmersive = true;
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
@@ -39,11 +40,12 @@ public class MainActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
+            isImmersive = true;
         }
 
         final TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
 
-        titleBar.setImmersive(true);
+        titleBar.setImmersive(isImmersive);
 
         titleBar.setBackgroundColor(Color.parseColor("#64b4ff"));
 
