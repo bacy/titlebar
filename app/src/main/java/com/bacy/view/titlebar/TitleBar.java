@@ -81,7 +81,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mLeftText.setTextSize(DEFAULT_ACTION_TEXT_SIZE);
         mLeftText.setSingleLine();
         mLeftText.setGravity(Gravity.CENTER_VERTICAL);
-        mLeftText.setPadding(mOutPadding, 0, mOutPadding, 0);
+        mLeftText.setPadding(mOutPadding + mActionPadding, 0, mOutPadding, 0);
 
         mCenterText = new TextView(context);
         mSubTitleText = new TextView(context);
