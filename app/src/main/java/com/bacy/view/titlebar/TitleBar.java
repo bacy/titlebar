@@ -60,7 +60,6 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     }
 
     private void init(Context context) {
-        mScreenWidth = getResources().getDisplayMetrics().widthPixels;
         if (mImmersive) {
             mStatusBarHeight = getStatusBarHeight();
         }
@@ -368,7 +367,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         } else {
             height = MeasureSpec.getSize(heightMeasureSpec) + mStatusBarHeight;
         }
-
+        mScreenWidth = MeasureSpec.getSize(widthMeasureSpec);
         measureChild(mLeftText, widthMeasureSpec, heightMeasureSpec);
         measureChild(mRightLayout, widthMeasureSpec, heightMeasureSpec);
         if (mLeftText.getMeasuredWidth() > mRightLayout.getMeasuredWidth()) {
