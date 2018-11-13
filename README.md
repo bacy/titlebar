@@ -46,3 +46,6 @@
 ###### 如果TitleBar分主副标题，用\n和\t区分，如果\n,主副标题上下排列，如果\t，主副标题左右排列
     titleBar.setTitle("文章详情\n副标题");
     titleBar.setTitle("文章详情\t副标题");
+    
+### 我的创业项目，创业不易，有需要的可以支持下哦~
+![alt text](http://img.homeszone.cn/1542078794535.jpg "鲜锋团")
