@@ -47,5 +47,3 @@
     titleBar.setTitle("文章详情\n副标题");
     titleBar.setTitle("文章详情\t副标题");
     
-### 我的创业项目，创业不易，有需要的可以支持下哦~
-![alt text](http://img.homeszone.cn/1542078794535.jpg "鲜锋团")
